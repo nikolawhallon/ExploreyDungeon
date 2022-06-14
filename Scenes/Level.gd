@@ -17,15 +17,15 @@ func _input(event):
 func _ready():
 	rng.randomize()
 
-	$Player/Camera2D.limit_bottom = $Dungeon.map_h * 24
-	$Player/Camera2D.limit_right = $Dungeon.map_w * 24
+	$Player/Camera2D.limit_bottom = $Dungeon.map_h * 16
+	$Player/Camera2D.limit_right = $Dungeon.map_w * 16
 	
 	# place the Player
 	while true:
 		var x = rng.randi_range(1, $Dungeon.map_w - 1)
 		var y = rng.randi_range(1, $Dungeon.map_h - 1)
 		if $Dungeon.is_ground(x, y):
-			$Player.position = Vector2(x * 24 + 12, y * 24 + 12)
+			$Player.position = Vector2(x * 16 + 8, y * 16 + 8)
 			break
 
 	# place the Key
@@ -36,7 +36,7 @@ func _ready():
 		var x = rng.randi_range(1, $Dungeon.map_w - 1)
 		var y = rng.randi_range(1, $Dungeon.map_h - 1)
 		if $Dungeon.is_ground(x, y):
-			key.position = Vector2(x * 24 + 12, y * 24 + 12)
+			key.position = Vector2(x * 16 + 8, y * 16 + 8)
 			break
 
 	# place the Warp
@@ -44,7 +44,7 @@ func _ready():
 		var x = rng.randi_range(1, $Dungeon.map_w - 1)
 		var y = rng.randi_range(1, $Dungeon.map_h - 1)
 		if $Dungeon.is_ground(x, y):
-			$Warp.position = Vector2(x * 24 + 12, y * 24 + 12)
+			$Warp.position = Vector2(x * 16 + 8, y * 16 + 8)
 			break
 
 func _on_Warp_entered():
