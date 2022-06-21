@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Themes/LabelTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/Game.gd" type="Script" id=2]
+
+[node name="Game" type="Node"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+margin_right = 312.0
+margin_bottom = 8.0
+
+[node name="Level" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 8.0
+size_flags_horizontal = 2
+theme = ExtResource( 1 )
+text = "LEVEL: 0"
+
+[node name="Version" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+margin_left = 280.0
+margin_right = 312.0
+margin_bottom = 8.0
+theme = ExtResource( 1 )
+text = "v0.1"
