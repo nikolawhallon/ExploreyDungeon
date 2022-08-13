@@ -2,7 +2,7 @@ extends TileMap
 
 export(int)   var map_w            = 160 / 4
 export(int)   var map_h            = 100 / 4
-export(float) var ground_seed      = 0.65
+export(float) var ground_seed      = 0.8
 export(int)   var wall_condition   = 4
 export(int)   var ground_condition = 3
 
@@ -23,6 +23,7 @@ func generate():
 	clear()
 	fill_wall()
 	random_ground()
+	double_vertically()
 	dig_caves()
 	get_biggest_cave()
 	
@@ -38,6 +39,13 @@ func random_ground():
 		for y in range(1, map_h - 1):
 			if rng.randf() < ground_seed:
 				set_cell(x, y, Tiles.GROUND)
+
+func double_vertically():
+	for x in range(1, map_w - 1):
+		for y in range(1, map_h - 1):
+			if get_cell(x, y) == Tiles.WALL:
+				if get_cell(x, y - 1) != Tiles.WALL and get_cell(x, y + 1) != Tiles.WALL:
+					set_cell(x, y + 1, Tiles.WALL)
 
 func dig_caves():
 	for _i in range(10):
