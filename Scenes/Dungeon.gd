@@ -1,7 +1,7 @@
 extends Node2D
 
-export(int)   var map_w            = 160 / 4
-export(int)   var map_h            = 100 / 4
+export(int)   var map_w            = 200 / 4
+export(int)   var map_h            = 120 / 4
 export(float) var ground_seed      = 0.8
 export(int)   var wall_condition   = 4
 export(int)   var ground_condition = 3
@@ -49,8 +49,8 @@ func fill_wall():
 			tiles[x][y] = Tiles.WALL
 
 func random_ground():
-	for x in range(2, map_w - 2):
-		for y in range(2, map_h - 2):
+	for x in range(3, map_w - 3):
+		for y in range(3, map_h - 3):
 			if rng.randf() < ground_seed:
 				tiles[x][y] = Tiles.GROUND
 
