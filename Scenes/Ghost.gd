@@ -3,6 +3,13 @@ extends Area2D
 export var speed = 10
 var destination = Vector2(320, 240)
 
+var rng = RandomNumberGenerator.new()
+
+func _ready():
+	rng.randomize()
+	
+	$AnimatedSprite.speed_scale = rng.randf_range(0.8, 1.2)
+
 func _physics_process(delta):
 	var velocity = (destination - position).normalized() * speed
 	position += velocity * delta
@@ -14,7 +21,6 @@ func _physics_process(delta):
 
 func destroy():
 	get_tree().queue_delete(self)
-
 
 func _on_Ghost_body_entered(body):
 	if body.is_in_group("Player"):
