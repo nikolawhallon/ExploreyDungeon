@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/key.png-76aca2debdd3a438783034316c3c3551.stex"
+path="res://.import/bear_walk_1.png-a9222a3d598f95da6964390fbdc88378.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/key.png"
-dest_files=[ "res://.import/key.png-76aca2debdd3a438783034316c3c3551.stex" ]
+source_file="res://Assets/Player/bear_walk_1.png"
+dest_files=[ "res://.import/bear_walk_1.png-a9222a3d598f95da6964390fbdc88378.stex" ]
 
 [params]
 

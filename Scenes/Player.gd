@@ -2,9 +2,9 @@ extends KinematicBody2D
 
 signal was_hit
 
-export var speed = 100
+export var speed = 70
 var velocity = Vector2(0, 0)
-var direction = Vector2(1, 0)
+var direction = Vector2(-1, 0)
 var collected_key = false
 
 func _physics_process(_delta):
@@ -28,6 +28,16 @@ func _physics_process(_delta):
 
 	if velocity != Vector2.ZERO:
 		direction = velocity.normalized()
+
+	if velocity == Vector2.ZERO:
+		$AnimatedSprite.animation = "idle"
+	else:
+		$AnimatedSprite.animation = "walk"
+	
+	if velocity.x > 0:
+		$AnimatedSprite.scale = Vector2(-1.0, 1.0)
+	elif velocity.x < 0:
+		$AnimatedSprite.scale = Vector2(1.0, 1.0)
 
 	var _returned_velocity = move_and_slide(velocity, Vector2(0, 0), false, 4, 0, false)
 

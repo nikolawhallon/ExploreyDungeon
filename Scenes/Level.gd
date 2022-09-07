@@ -10,9 +10,18 @@ func _input(event):
 		if event.scancode == KEY_F:
 			var fireball = load("res://Scenes/Fireball.tscn").instance()
 			add_child(fireball)
-
-			fireball.position = $YSort/Player.position
-			fireball.direction = $YSort/Player.direction
+			var direction = $YSort/Player.direction
+			fireball.position = $YSort/Player.position + direction * fireball.speed * 4.0 * 0.016
+			fireball.direction = direction
+			
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT:
+			if event.pressed:
+				var fireball = load("res://Scenes/Fireball.tscn").instance()
+				add_child(fireball)
+				var direction = (get_global_mouse_position() - $YSort/Player.global_position).normalized()
+				fireball.position = $YSort/Player.position + direction * fireball.speed * 4.0 * 0.016
+				fireball.direction = direction
 
 func _ready():
 	rng.randomize()

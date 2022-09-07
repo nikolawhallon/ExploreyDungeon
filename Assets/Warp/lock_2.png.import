@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/warp.png-ef2d664c483727699a82d7476c9aae53.stex"
+path="res://.import/lock_2.png-293b83cea93ca2883a24eb865eabea3d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/warp.png"
-dest_files=[ "res://.import/warp.png-ef2d664c483727699a82d7476c9aae53.stex" ]
+source_file="res://Assets/Warp/lock_2.png"
+dest_files=[ "res://.import/lock_2.png-293b83cea93ca2883a24eb865eabea3d.stex" ]
 
 [params]
 
