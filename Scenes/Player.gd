@@ -1,11 +1,14 @@
 extends KinematicBody2D
 
 signal was_hit
+signal collected_fireball_scroll
 
 export var speed = 70
 var velocity = Vector2(0, 0)
 var direction = Vector2(-1, 0)
 var collected_key = false
+
+var fireball_power = 100
 
 func _physics_process(_delta):
 	if Input.is_key_pressed(KEY_W):
@@ -44,3 +47,7 @@ func _physics_process(_delta):
 func was_hit():
 	emit_signal("was_hit")
 	visible = false
+
+func collected_fireball_scroll():
+	fireball_power = clamp(fireball_power + 50, 0, 100)
+	emit_signal("collected_fireball_scroll")

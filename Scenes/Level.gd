@@ -8,24 +8,13 @@ var rng = RandomNumberGenerator.new()
 func _input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_F:
-			var fireball = load("res://Scenes/Fireball.tscn").instance()
-			add_child(fireball)
-			var direction = $YSort/Player.direction
-			fireball.position = $YSort/Player.position + direction * fireball.speed * 4.0 * 0.016
-			fireball.direction = direction
-			
-	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT:
-			if event.pressed:
-				var fireball = load("res://Scenes/Fireball.tscn").instance()
-				add_child(fireball)
-				var direction = (get_global_mouse_position() - $YSort/Player.global_position).normalized()
-				fireball.position = $YSort/Player.position + direction * fireball.speed * 4.0 * 0.016
-				fireball.direction = direction
+			spawn_fireballs()
 
 func _ready():
 	rng.randomize()
 
+	$CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballChargeBar.value = $YSort/Player.fireball_power
+	
 	$YSort/Player/Camera2D.limit_bottom = $YSort/Dungeon.map_h * 16
 	$YSort/Player/Camera2D.limit_right = $YSort/Dungeon.map_w * 16
 	
@@ -56,6 +45,17 @@ func _ready():
 			$Warp.position = Vector2(x * 16 + 8, y * 16 + 8)
 			break
 
+	# place a FireballScroll
+	var fireball_scroll = load("res://Scenes/FireballScroll.tscn").instance()
+	add_child(fireball_scroll)
+
+	while true:
+		var x = rng.randi_range(1, $YSort/Dungeon.map_w - 1)
+		var y = rng.randi_range(1, $YSort/Dungeon.map_h - 1)
+		if $YSort/Dungeon.is_ground(x, y):
+			fireball_scroll.position = Vector2(x * 16 + 8, y * 16 + 8)
+			break
+
 func _on_Warp_entered():
 	emit_signal("completed")
 
@@ -80,3 +80,29 @@ func destroy():
 
 func _on_Player_was_hit():
 	emit_signal("game_over")
+
+func _on_FireballButton_pressed():
+	spawn_fireballs()
+
+func spawn_fireballs():
+	var direction = (get_global_mouse_position() - $YSort/Player.global_position).normalized()
+	spawn_fireball(direction)
+
+	if $YSort/Player.fireball_power > 33:
+		spawn_fireball(direction.rotated(PI / 16.0))
+		spawn_fireball(direction.rotated(-PI / 16.0))
+	if $YSort/Player.fireball_power > 66:
+		spawn_fireball(direction.rotated(PI / 8.0))
+		spawn_fireball(direction.rotated(-PI / 8.0))
+
+	$YSort/Player.fireball_power -= 5
+	$CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballChargeBar.value = $YSort/Player.fireball_power
+	
+func spawn_fireball(direction):
+	var fireball = load("res://Scenes/Fireball.tscn").instance()
+	$YSort/Player.add_child(fireball)
+	fireball.global_position = $YSort/Player.global_position + direction * fireball.speed * 4.0 * 0.016
+	fireball.direction = direction
+
+func _on_Player_collected_fireball_scroll():
+	$CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballChargeBar.value = $YSort/Player.fireball_power
