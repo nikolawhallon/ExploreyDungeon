@@ -95,12 +95,17 @@ func spawn_fireballs():
 		spawn_fireball(direction.rotated(PI / 8.0))
 		spawn_fireball(direction.rotated(-PI / 8.0))
 
-	$YSort/Player.fireball_power -= 5
+	$YSort/Player.fireball_power = clamp($YSort/Player.fireball_power - 5, 0, 100)
 	$CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballChargeBar.value = $YSort/Player.fireball_power
 	
 func spawn_fireball(direction):
 	var fireball = load("res://Scenes/Fireball.tscn").instance()
-	$YSort/Player.add_child(fireball)
+	# note: adding fireball as a child of just $YSort does not work, and it seems mysterious
+	# https://github.com/godotengine/godot/issues/39872
+	# https://www.godotforums.org/d/23501-y-sort-and-instanced-child-nodes
+	# https://godotengine.org/qa/144986/intanced-children-of-ysort-node-do-not-sort-correctly
+	# https://godotengine.org/qa/81429/child-node-specific-node-inside-current-scene-via-gdscript
+	$YSort/Dungeon.add_child(fireball)
 	fireball.global_position = $YSort/Player.global_position + direction * fireball.speed * 4.0 * 0.016
 	fireball.direction = direction
 
