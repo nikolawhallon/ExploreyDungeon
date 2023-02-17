@@ -5,10 +5,32 @@ signal game_over
 
 var rng = RandomNumberGenerator.new()
 
-func _input(event):
+var mouse_index = null
+
+func _unhandled_input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_F:
 			spawn_fireballs()
+
+	if event is InputEventScreenTouch:
+		if event.is_pressed():
+			$YSort/Player.destination = get_canvas_transform().xform_inv(event.get_position())
+		if not event.pressed:
+			$YSort/Player.destination = null
+	if event is InputEventScreenDrag:
+		$YSort/Player.destination = get_canvas_transform().xform_inv(event.get_position())
+
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			mouse_index = event.get_button_index()
+			$YSort/Player.destination = get_global_mouse_position()
+		if not event.is_pressed():
+			if event.get_button_index() == mouse_index:
+				mouse_index = null
+				$YSort/Player.destination = null
+	if event is InputEventMouseMotion:
+		if mouse_index != null:
+			$YSort/Player.destination = get_global_mouse_position()
 
 func _ready():
 	rng.randomize()
@@ -85,7 +107,7 @@ func _on_FireballButton_pressed():
 	spawn_fireballs()
 
 func spawn_fireballs():
-	var direction = (get_global_mouse_position() - $YSort/Player.global_position).normalized()
+	var direction = $YSort/Player.direction
 	spawn_fireball(direction)
 
 	if $YSort/Player.fireball_power > 33:

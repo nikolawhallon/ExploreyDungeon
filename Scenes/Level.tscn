@@ -43,7 +43,10 @@ margin_right = 44.0
 margin_bottom = 42.0
 custom_constants/separation = 1
 
-[node name="FireballButton" type="TextureButton" parent="CanvasLayer/MarginContainer/HBoxContainer/FireballSpell"]
+[node name="FireballButtonMobile" type="TouchScreenButton" parent="CanvasLayer/MarginContainer/HBoxContainer/FireballSpell"]
+normal = ExtResource( 6 )
+
+[node name="FireballButtonDesktop" type="TextureButton" parent="CanvasLayer/MarginContainer/HBoxContainer/FireballSpell"]
 margin_right = 44.0
 margin_bottom = 32.0
 texture_normal = ExtResource( 6 )
@@ -78,4 +81,5 @@ texture_progress = ExtResource( 9 )
 [connection signal="collected_fireball_scroll" from="YSort/Player" to="." method="_on_Player_collected_fireball_scroll"]
 [connection signal="was_hit" from="YSort/Player" to="." method="_on_Player_was_hit"]
 [connection signal="timeout" from="GhostSpawnTimer" to="." method="_on_GhostSpawnTimer_timeout"]
-[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballButton" to="." method="_on_FireballButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballButtonMobile" to="." method="_on_FireballButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballButtonDesktop" to="." method="_on_FireballButton_pressed"]

@@ -8,6 +8,8 @@ var velocity = Vector2(0, 0)
 var direction = Vector2(-1, 0)
 var collected_key = false
 
+var destination = null
+
 var fireball_power = 100
 
 func _physics_process(_delta):
@@ -25,9 +27,9 @@ func _physics_process(_delta):
 	else:
 		velocity.x = 0
 
-	if Input.is_mouse_button_pressed(BUTTON_LEFT):
-		if get_global_mouse_position().distance_to(global_position) > 2:
-			velocity = speed * (get_global_mouse_position() - global_position).normalized()
+	if destination != null:
+		if destination.distance_to(global_position) > 2:
+			velocity = speed * (destination - global_position).normalized()
 
 	if velocity != Vector2.ZERO:
 		direction = velocity.normalized()
