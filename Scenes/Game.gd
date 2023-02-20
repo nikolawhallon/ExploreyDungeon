@@ -3,17 +3,31 @@ extends Node
 var level
 var score = 0
 
-func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.scancode == KEY_SPACE:
-			if get_tree().paused:
-				get_tree().paused = false
-				level.destroy()
-				score = 0
-				$CanvasLayer/MarginContainer/HBoxContainer/Level.text = "LEVEL: " + str(score)
-				init_level()
+var started = false
 
-func _ready():
+func _input(event):
+	if not started or get_tree().paused:
+		if event is InputEventKey and event.pressed:
+			if event.scancode == KEY_SPACE:
+				restart()
+		if event is InputEventMouseButton:
+			if event.is_pressed():
+				restart()
+		if event is InputEventScreenTouch:
+			if event.is_pressed():
+				restart()
+
+func restart():
+	if not started:
+		started = true
+		$CanvasLayer/StartLabel.visible = false
+	if get_tree().paused:
+		get_tree().paused = false
+		$CanvasLayer/RetryLabel.visible = false
+	if level != null:
+		level.destroy()
+	score = 0
+	$CanvasLayer/MarginContainer/HBoxContainer/Level.text = "LEVEL: " + str(score)
 	init_level()
 
 func init_level():
@@ -33,3 +47,4 @@ func _on_Level_game_over():
 	# to have finer control, so that things like lit torch
 	# animations can continue to occur
 	get_tree().paused = true
+	$CanvasLayer/RetryLabel.visible = true

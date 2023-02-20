@@ -65,7 +65,10 @@ margin_right = 92.0
 margin_bottom = 42.0
 custom_constants/separation = 1
 
-[node name="BeamButton" type="TextureButton" parent="CanvasLayer/MarginContainer/HBoxContainer/BeamSpell"]
+[node name="BeamButtonMobile" type="TouchScreenButton" parent="CanvasLayer/MarginContainer/HBoxContainer/BeamSpell"]
+normal = ExtResource( 7 )
+
+[node name="BeamButtonDesktop" type="TextureButton" parent="CanvasLayer/MarginContainer/HBoxContainer/BeamSpell"]
 margin_right = 44.0
 margin_bottom = 32.0
 texture_normal = ExtResource( 7 )

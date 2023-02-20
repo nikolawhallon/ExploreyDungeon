@@ -6,19 +6,12 @@ signal game_over
 var rng = RandomNumberGenerator.new()
 
 var mouse_index = null
+var touch_index = null
 
 func _unhandled_input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_F:
 			spawn_fireballs()
-
-	if event is InputEventScreenTouch:
-		if event.is_pressed():
-			$YSort/Player.destination = get_canvas_transform().xform_inv(event.get_position())
-		if not event.pressed:
-			$YSort/Player.destination = null
-	if event is InputEventScreenDrag:
-		$YSort/Player.destination = get_canvas_transform().xform_inv(event.get_position())
 
 	if event is InputEventMouseButton:
 		if event.is_pressed():
@@ -31,6 +24,18 @@ func _unhandled_input(event):
 	if event is InputEventMouseMotion:
 		if mouse_index != null:
 			$YSort/Player.destination = get_global_mouse_position()
+
+	if event is InputEventScreenTouch:
+		if event.is_pressed():
+			touch_index = event.get_index()
+			$YSort/Player.destination = get_canvas_transform().xform_inv(event.get_position())
+		if not event.pressed:
+			if event.get_index() == touch_index:
+				touch_index = null
+				$YSort/Player.destination = null
+	if event is InputEventScreenDrag:
+		if touch_index != null:
+			$YSort/Player.destination = get_canvas_transform().xform_inv(event.get_position())
 
 func _ready():
 	rng.randomize()
