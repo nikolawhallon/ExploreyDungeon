@@ -4,6 +4,7 @@ var level
 var score = 0
 
 var started = false
+var temp_dungeon = null
 
 func _input(event):
 	if not started or get_tree().paused:
@@ -17,7 +18,14 @@ func _input(event):
 			if event.is_pressed():
 				restart()
 
+func _ready():
+	temp_dungeon = load("res://Scenes/Dungeon.tscn").instance()
+	add_child(temp_dungeon)
+
 func restart():
+	if temp_dungeon != null:
+		get_tree().queue_delete(temp_dungeon)
+		temp_dungeon = null
 	if not started:
 		started = true
 		$CanvasLayer/StartLabel.visible = false
