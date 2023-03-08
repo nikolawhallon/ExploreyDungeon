@@ -12,6 +12,8 @@ func _unhandled_input(event):
 	if event is InputEventKey and event.pressed:
 		if event.scancode == KEY_F:
 			spawn_fireballs()
+		if event.scancode == KEY_B:
+			spawn_beams()
 
 	if event is InputEventMouseButton:
 		if event.is_pressed():
@@ -42,7 +44,8 @@ func _ready():
 	rng.randomize()
 
 	$CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballChargeBar.value = $YSort/Player.fireball_power
-	
+	$CanvasLayer/MarginContainer/HBoxContainer/BeamSpell/BeamChargeBar.value = $YSort/Player.beam_power
+		
 	$YSort/Player/Camera2D.limit_bottom = $YSort/Dungeon.map_h * 16
 	$YSort/Player/Camera2D.limit_right = $YSort/Dungeon.map_w * 16
 	
@@ -82,6 +85,17 @@ func _ready():
 		var y = rng.randi_range(1, $YSort/Dungeon.map_h - 1)
 		if $YSort/Dungeon.is_ground(x, y):
 			fireball_scroll.position = Vector2(x * 16 + 8, y * 16 + 8)
+			break
+
+	# place a BeamScroll
+	var beam_scroll = load("res://Scenes/BeamScroll.tscn").instance()
+	add_child(beam_scroll)
+
+	while true:
+		var x = rng.randi_range(1, $YSort/Dungeon.map_w - 1)
+		var y = rng.randi_range(1, $YSort/Dungeon.map_h - 1)
+		if $YSort/Dungeon.is_ground(x, y):
+			beam_scroll.position = Vector2(x * 16 + 8, y * 16 + 8)
 			break
 
 func _on_Warp_entered():
@@ -137,5 +151,22 @@ func spawn_fireball(direction):
 	fireball.global_position = $YSort/Player.global_position + direction * fireball.speed * 4.0 * 0.016
 	fireball.direction = direction
 
+func spawn_beams():
+	if $YSort/Player.beam_power <= 0:
+		return
+		
+	var beam_pattern = load("res://Scenes/BeamPattern.tscn").instance()
+	add_child(beam_pattern)
+	beam_pattern.global_position = $YSort/Player.global_position
+
+	$YSort/Player.beam_power = clamp($YSort/Player.beam_power - 5, 0, 100)
+	$CanvasLayer/MarginContainer/HBoxContainer/BeamSpell/BeamChargeBar.value = $YSort/Player.beam_power
+
 func _on_Player_collected_fireball_scroll():
 	$CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballChargeBar.value = $YSort/Player.fireball_power
+
+func _on_BeamButton_pressed():
+	spawn_beams()
+
+func _on_Player_collected_beam_scroll():
+	$CanvasLayer/MarginContainer/HBoxContainer/BeamSpell/BeamChargeBar.value = $YSort/Player.beam_power

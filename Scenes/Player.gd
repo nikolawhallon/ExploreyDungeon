@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 signal was_hit
 signal collected_fireball_scroll
+signal collected_beam_scroll
 
 export var speed = 70
 var velocity = Vector2(0, 0)
@@ -11,6 +12,7 @@ var collected_key = false
 var destination_direction = null
 
 var fireball_power = 100
+var beam_power = 100
 
 func set_destination_direction(click_touch_global_position):
 	if click_touch_global_position != null:
@@ -59,3 +61,7 @@ func was_hit():
 func collected_fireball_scroll():
 	fireball_power = clamp(fireball_power + 50, 0, 100)
 	emit_signal("collected_fireball_scroll")
+
+func collected_beam_scroll():
+	beam_power = clamp(beam_power + 50, 0, 100)
+	emit_signal("collected_beam_scroll")
