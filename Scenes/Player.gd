@@ -8,7 +8,15 @@ var velocity = Vector2(0, 0)
 var direction = Vector2(-1, 0)
 var collected_key = false
 
+var destination_direction = null
+
 var fireball_power = 100
+
+func set_destination_direction(click_touch_global_position):
+	if click_touch_global_position != null:
+		destination_direction = (click_touch_global_position - global_position)
+	else:
+		destination_direction = null
 
 func _physics_process(_delta):
 	if Input.is_key_pressed(KEY_W):
@@ -25,9 +33,9 @@ func _physics_process(_delta):
 	else:
 		velocity.x = 0
 
-	if Input.is_mouse_button_pressed(BUTTON_LEFT):
-		if get_global_mouse_position().distance_to(global_position) > 2:
-			velocity = speed * (get_global_mouse_position() - global_position).normalized()
+	if destination_direction != null:
+		if destination_direction.length() > 2:
+			velocity = speed * destination_direction.normalized()
 
 	if velocity != Vector2.ZERO:
 		direction = velocity.normalized()

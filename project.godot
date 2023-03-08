@@ -27,12 +27,15 @@ window/stretch/aspect="expand"
 
 window=false
 
+[input_devices]
+
+pointing/emulate_mouse_from_touch=false
+
 [physics]
 
 common/enable_pause_aware_picking=true
 
 [rendering]
 
-quality/driver/driver_name="GLES2"
 2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"
