@@ -127,6 +127,7 @@ func _on_FireballButton_pressed():
 	spawn_fireballs()
 
 func spawn_fireballs():
+	$YSort/Player.play_fireball_sfx()
 	var direction = $YSort/Player.direction
 	spawn_fireball(direction)
 
@@ -152,6 +153,7 @@ func spawn_fireball(direction):
 	fireball.direction = direction
 
 func spawn_beams():
+	$YSort/Player.play_beam_sfx()
 	if $YSort/Player.beam_power <= 0:
 		return
 		
