@@ -9,11 +9,10 @@ var mouse_index = null
 var touch_index = null
 
 func _unhandled_input(event):
-	if event is InputEventKey and event.pressed:
-		if event.scancode == KEY_F:
-			spawn_fireballs()
-		if event.scancode == KEY_B:
-			spawn_beams()
+	if Input.is_action_just_pressed("fire"):
+		spawn_fireballs()
+	if Input.is_action_just_pressed("beam"):
+		spawn_beams()
 
 	if event is InputEventMouseButton:
 		if event.is_pressed():
@@ -106,6 +105,10 @@ func _process(_delta):
 	for ghost in ghosts:
 		ghost.destination = $YSort/Player.position
 
+	var demons = get_tree().get_nodes_in_group("Demon")
+	for demon in demons:
+		demon.destination = $YSort/Player.position
+
 func _on_GhostSpawnTimer_timeout():
 	var ghost = load("res://Scenes/Ghost.tscn").instance()
 	add_child(ghost)
@@ -153,10 +156,9 @@ func spawn_fireball(direction):
 	fireball.direction = direction
 
 func spawn_beams():
-	$YSort/Player.play_beam_sfx()
 	if $YSort/Player.beam_power <= 0:
 		return
-		
+	$YSort/Player.play_beam_sfx()
 	var beam_pattern = load("res://Scenes/BeamPattern.tscn").instance()
 	add_child(beam_pattern)
 	beam_pattern.global_position = $YSort/Player.global_position
@@ -172,3 +174,21 @@ func _on_BeamButton_pressed():
 
 func _on_Player_collected_beam_scroll():
 	$CanvasLayer/MarginContainer/HBoxContainer/BeamSpell/BeamChargeBar.value = $YSort/Player.beam_power
+
+func _on_DemonSpawnTimer_timeout():
+	var demon = load("res://Scenes/Demon.tscn").instance()
+	$YSort/Dungeon.add_child(demon)
+
+	var random_angle = rng.randf_range(0.0, 2 * PI)
+	var random_distance = rng.randi_range(100, 200)
+	var spawn_position = $YSort/Player.position + Vector2(cos(random_angle), sin(random_angle)) * random_distance
+	
+	while true:
+		if $YSort/Dungeon.is_ground(spawn_position.x / 16, spawn_position.y / 16):
+			break
+		random_angle = rng.randf_range(0.0, 2 * PI)
+		random_distance = rng.randi_range(100, 200)
+		spawn_position = $YSort/Player.position + Vector2(cos(random_angle), sin(random_angle)) * random_distance
+	
+	demon.position = spawn_position
+	demon.destination = $YSort/Player.position

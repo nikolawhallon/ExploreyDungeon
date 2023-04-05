@@ -73,6 +73,11 @@ func _physics_process(_delta):
 
 	var _returned_velocity = move_and_slide(velocity, Vector2(0, 0), false, 4, 0, false)
 
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.is_in_group("Demon"):
+			was_hit()
+	
 func was_hit():
 	if paused:
 		return

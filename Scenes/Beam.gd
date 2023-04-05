@@ -75,3 +75,7 @@ func _on_Timer_timeout():
 func _on_Beam_area_entered(area):
 	if area.is_in_group("Ghost"):
 		area.destroy()
+
+func _on_Beam_body_entered(body):
+	if body.is_in_group("Demon"):
+		body.destroy()

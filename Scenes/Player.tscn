@@ -37,7 +37,6 @@ limit_top = 0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 2 )
 animation = "walk"
-frame = 3
 playing = true
 
 [node name="FireballSfx" type="AudioStreamPlayer2D" parent="."]

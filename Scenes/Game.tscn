@@ -15,11 +15,14 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -104.0
-margin_top = -4.0
+margin_top = -15.0
 margin_right = 104.0
-margin_bottom = 4.0
+margin_bottom = 15.0
 theme = ExtResource( 1 )
-text = "CLICK/TOUCH/SPACE TO START"
+text = "EXPLOREY DUNGEON
+
+CLICK/TOUCH/SPACE TO START"
+align = 1
 
 [node name="RetryLabel" type="Label" parent="CanvasLayer"]
 visible = false
