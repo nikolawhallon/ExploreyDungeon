@@ -42,8 +42,10 @@ playing = true
 [node name="LockAnimation" type="AnimatedSprite" parent="."]
 z_index = 1
 frames = SubResource( 3 )
-frame = 2
 playing = true
 offset = Vector2( 0, -16 )
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_Warp_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_AudioStreamPlayer2D_finished"]

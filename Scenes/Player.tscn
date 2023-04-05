@@ -38,3 +38,9 @@ limit_top = 0
 frames = SubResource( 2 )
 animation = "walk"
 playing = true
+
+[node name="FireballSfx" type="AudioStreamPlayer2D" parent="."]
+
+[node name="BeamSfx" type="AudioStreamPlayer2D" parent="."]
+
+[node name="StepSfx" type="AudioStreamPlayer" parent="."]

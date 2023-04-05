@@ -8,9 +8,9 @@ func _ready():
 func destroy():
 	get_tree().queue_delete(self)
 
-func _on_FireballScroll_body_entered(body):
+func _on_BeamScroll_body_entered(body):
 	if body.is_in_group("Player"):
-		body.collected_fireball_scroll()
+		body.collected_beam_scroll()
 		visible = false
 		set_collision_layer_bit(0, false)
 		set_collision_mask_bit(0, false)

@@ -18,14 +18,27 @@ config/icon="res://icon.png"
 
 window/size/width=320
 window/size/height=240
-window/size/test_width=640
-window/size/test_height=480
+window/size/test_width=630
+window/size/test_height=500
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
 [global]
 
 window=false
+
+[input]
+
+fire={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+beam={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":66,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [input_devices]
 

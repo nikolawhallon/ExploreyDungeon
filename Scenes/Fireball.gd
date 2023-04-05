@@ -18,6 +18,8 @@ func _on_Fireball_area_entered(area):
 		destroy()
 
 func _on_Fireball_body_entered(body):
+	if body.is_in_group("Demon"):
+		body.destroy()
 	# if the fireball hits any object (especially collidable tiles)
 	# EXCEPT the Player, destroy the fireball
 	if !body.is_in_group("Player"):

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Beam.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/BeamPattern.gd" type="Script" id=2]
+
+[node name="BeamPattern" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="BeamRight" parent="." instance=ExtResource( 1 )]
+position = Vector2( 16, 0 )
+
+[node name="BeamLeft" parent="." instance=ExtResource( 1 )]
+position = Vector2( -16, 0 )
+
+[node name="BeamUp" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -16 )
+
+[node name="BeamDown" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, 16 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
