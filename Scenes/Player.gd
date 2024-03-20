@@ -37,16 +37,16 @@ func _physics_process(_delta):
 	if paused:
 		return
 
-	if Input.is_key_pressed(KEY_W):
+	if Input.is_action_pressed("move_up"):
 		velocity.y = -speed
-	elif Input.is_key_pressed(KEY_S):
+	elif Input.is_action_pressed("move_down"):
 		velocity.y = speed
 	else:
 		velocity.y = 0
 
-	if Input.is_key_pressed(KEY_A):
+	if Input.is_action_pressed("move_left"):
 		velocity.x = - speed
-	elif Input.is_key_pressed(KEY_D):
+	elif Input.is_action_pressed("move_right"):
 		velocity.x = speed
 	else:
 		velocity.x = 0

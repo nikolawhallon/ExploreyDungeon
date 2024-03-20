@@ -6,6 +6,9 @@ var score = 0
 var started = false
 var temp_dungeon = null
 
+func _unhandled_input(event):
+	OS.window_fullscreen = true
+
 func _input(event):
 	if not started or get_tree().paused:
 		if event is InputEventKey and event.pressed:
@@ -17,6 +20,11 @@ func _input(event):
 		if event is InputEventScreenTouch:
 			if event.is_pressed():
 				restart()
+
+func _process(_delta):
+	if not started or get_tree().paused:
+		if Input.is_action_just_pressed("start"):
+			restart()
 
 func _ready():
 	temp_dungeon = load("res://Scenes/Dungeon.tscn").instance()

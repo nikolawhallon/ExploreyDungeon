@@ -35,16 +35,17 @@ autostart = true
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1.0
-margin_top = -42.0
+margin_left = 32.0
+margin_top = -58.0
+margin_right = -32.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
-margin_right = 319.0
-margin_bottom = 42.0
+margin_right = 256.0
+margin_bottom = 58.0
 
 [node name="FireballSpell" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 margin_right = 44.0
-margin_bottom = 42.0
+margin_bottom = 58.0
 custom_constants/separation = 1
 
 [node name="FireballButtonMobile" type="TouchScreenButton" parent="CanvasLayer/MarginContainer/HBoxContainer/FireballSpell"]
@@ -65,7 +66,7 @@ texture_progress = ExtResource( 8 )
 [node name="BeamSpell" type="VBoxContainer" parent="CanvasLayer/MarginContainer/HBoxContainer"]
 margin_left = 48.0
 margin_right = 92.0
-margin_bottom = 42.0
+margin_bottom = 58.0
 custom_constants/separation = 1
 
 [node name="BeamButtonMobile" type="TouchScreenButton" parent="CanvasLayer/MarginContainer/HBoxContainer/BeamSpell"]
