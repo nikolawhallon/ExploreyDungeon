@@ -48,6 +48,7 @@ func _on_Level_completed():
 	level.destroy()
 	score += 1
 	$CanvasLayer/MarginContainer/HBoxContainer/Level.text = "LEVEL: " + str(score)
+	$Websocket.send_event("LevelCompleted")
 	init_level()
 
 func _on_Level_game_over():
@@ -56,3 +57,7 @@ func _on_Level_game_over():
 	# animations can continue to occur
 	get_tree().paused = true
 	$CanvasLayer/RetryLabel.visible = true
+
+func _on_Websocket_event_received(event):
+	print("handling event")
+	print(event)
