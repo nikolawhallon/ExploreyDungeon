@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal was_hit
 signal collected_fireball_scroll
 signal collected_beam_scroll
+signal collected_key
 
 var sfx_fireball = preload("res://Assets/Sfx/fire.wav")
 var sfx_beam = preload("res://Assets/Sfx/beam.wav")
@@ -85,18 +86,24 @@ func was_hit():
 	emit_signal("was_hit")
 	visible = false
 
-func collected_fireball_scroll():
+func collected_key():
 	if paused:
 		return
 
-	fireball_power = clamp(fireball_power + 50, 0, 100)
+	emit_signal("collected_key")
+
+func collected_fireball_scroll(amount):
+	if paused:
+		return
+
+	fireball_power = clamp(fireball_power + amount, 0, 100)
 	emit_signal("collected_fireball_scroll")
 
-func collected_beam_scroll():
+func collected_beam_scroll(amount):
 	if paused:
 		return
 
-	beam_power = clamp(beam_power + 50, 0, 100)
+	beam_power = clamp(beam_power + amount, 0, 100)
 	emit_signal("collected_beam_scroll")
 
 func play_fireball_sfx():

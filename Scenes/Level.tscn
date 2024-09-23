@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Level.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Dungeon.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Spells/beam_button.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Spells/charge_fill_red.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Spells/charge_fill_blue.png" type="Texture" id=9]
+[ext_resource path="res://Scenes/Websocket.gd" type="Script" id=10]
 
 [node name="Level" type="Node2D"]
 pause_mode = 1
@@ -83,9 +84,13 @@ margin_bottom = 41.0
 texture_over = ExtResource( 5 )
 texture_progress = ExtResource( 9 )
 
+[node name="Websocket" type="Node" parent="."]
+script = ExtResource( 10 )
+
 [connection signal="entered" from="Warp" to="." method="_on_Warp_entered"]
 [connection signal="collected_beam_scroll" from="YSort/Player" to="." method="_on_Player_collected_beam_scroll"]
 [connection signal="collected_fireball_scroll" from="YSort/Player" to="." method="_on_Player_collected_fireball_scroll"]
+[connection signal="collected_key" from="YSort/Player" to="." method="_on_Player_collected_key"]
 [connection signal="was_hit" from="YSort/Player" to="." method="_on_Player_was_hit"]
 [connection signal="timeout" from="GhostSpawnTimer" to="." method="_on_GhostSpawnTimer_timeout"]
 [connection signal="timeout" from="DemonSpawnTimer" to="." method="_on_DemonSpawnTimer_timeout"]
@@ -93,3 +98,4 @@ texture_progress = ExtResource( 9 )
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/FireballSpell/FireballButtonDesktop" to="." method="_on_FireballButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/BeamSpell/BeamButtonMobile" to="." method="_on_BeamButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/MarginContainer/HBoxContainer/BeamSpell/BeamButtonDesktop" to="." method="_on_BeamButton_pressed"]
+[connection signal="event_received" from="Websocket" to="." method="_on_Websocket_event_received"]
