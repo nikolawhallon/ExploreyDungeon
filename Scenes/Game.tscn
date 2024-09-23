@@ -21,7 +21,7 @@ margin_bottom = 15.0
 theme = ExtResource( 1 )
 text = "EXPLOREY DUNGEON
 
-CLICK/TOUCH/SPACE TO START"
+A/B/X/Y TO START"
 align = 1
 
 [node name="RetryLabel" type="Label" parent="CanvasLayer"]
@@ -35,16 +35,17 @@ margin_top = -4.0
 margin_right = 104.0
 margin_bottom = 4.0
 theme = ExtResource( 1 )
-text = "CLICK/TOUCH/SPACE TO RETRY"
+text = "A/B/X/Y TO RETRY"
+align = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchor_right = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
+margin_left = 32.0
+margin_top = 16.0
+margin_right = -32.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
-margin_right = 312.0
+margin_right = 256.0
 margin_bottom = 8.0
 
 [node name="Level" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
@@ -55,7 +56,7 @@ theme = ExtResource( 1 )
 text = "LEVEL: 0"
 
 [node name="Version" type="Label" parent="CanvasLayer/MarginContainer/HBoxContainer"]
-margin_left = 312.0
-margin_right = 312.0
+margin_left = 256.0
+margin_right = 256.0
 margin_bottom = 8.0
 theme = ExtResource( 1 )
