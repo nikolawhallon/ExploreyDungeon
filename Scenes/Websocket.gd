@@ -5,7 +5,7 @@ signal event_received
 var client = WebSocketClient.new()
 var ws_connected = false
 
-var URL = "ws://127.0.0.1:5000"
+var URL = "ws://192.168.1.10:5000"
 
 var id = null
 

@@ -98,6 +98,7 @@ func _ready():
 			break
 
 func _on_Warp_entered():
+	$Websocket.send_event("WarpEntered")
 	emit_signal("completed")
 
 func _process(_delta):
@@ -192,3 +193,14 @@ func _on_DemonSpawnTimer_timeout():
 	
 	demon.position = spawn_position
 	demon.destination = $YSort/Player.position
+
+
+func _on_Websocket_event_received(event):
+	print("handling event")
+	print(event)
+	if event == "LicitarCollected":
+		$YSort/Player.collected_fireball_scroll(10)
+		$YSort/Player.collected_beam_scroll(10)
+
+func _on_Player_collected_key():
+	$Websocket.send_event("KeyCollected")

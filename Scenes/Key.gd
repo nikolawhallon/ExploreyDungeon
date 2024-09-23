@@ -10,6 +10,7 @@ func destroy():
 
 func _on_Key_body_entered(body):
 	if body.is_in_group("Player"):
+		body.collected_key()
 		body.collected_key = true
 		visible = false
 		set_collision_layer_bit(0, false)
